@@ -24,6 +24,21 @@ class Client
       DB.exec("INSERT INTO clients (client_name, client_id, stylist_id) VALUES ('#{@client_name}', #{@client_id}, #{@stylist_id});")
     end
 
+    define_method(:update) do |attributes|
+    @client_name = attributes.fetch(:client_name)
+    @stylist_id = attributes.fetch(:stylist_id)
+    @client_id = self.client_id()
+    DB.exec("UPDATE clients SET client_name = '#{@client_name}', stylist_id = #{@stylist_id} WHERE client_id = #{client_id};")
+  end
+
+  define_method(:delete) do
+        DB.exec("DELETE FROM clients WHERE client_id = #{self.client_id()};")
+      end
+
+
+
+
+
     define_method(:==) do |another_client|
         self.client_name().==(another_client.client_name()).&(self.stylist_id().==(another_client.stylist_id()))
       end

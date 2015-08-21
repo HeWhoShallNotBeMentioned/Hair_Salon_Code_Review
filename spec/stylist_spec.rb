@@ -52,5 +52,27 @@ describe("#save") do
       end
     end
 
+    describe("#update") do
+      it("lets you update stylists in the database") do
+        stylist = Stylist.new({:stylist_name => "Wilma Rudolph", :stylist_id => 1})
+        stylist.save()
+        stylist.update({:stylist_name => "Harry Dotter", :stylist_id => 1 })
+        expect(stylist.stylist_name()).to(eq('Harry Dotter'))
+      end
+    end
+
+
+    describe("#delete") do
+        it("lets you delete a stylist from the database") do
+          stylist = Stylist.new({:stylist_name => "Schlmo Abramowitz", :stylist_id => 1, :client_id => 1 })
+          stylist.save()
+          stylist2 = Stylist.new({:stylist_name => "Tom Bodet", :stylist_id => 2,  })
+          stylist2.save()
+          stylist.delete()
+          expect(Stylist.all()).to(eq([stylist2]))
+        end
+      end
+
+
 
 end
