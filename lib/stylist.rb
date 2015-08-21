@@ -10,10 +10,12 @@ class Stylist
       returned_stylists = DB.exec("Select * FROM stylists;")
       stylists = []
       returned_stylists.each() do |stylist|
-        client_name = stylist.fetch("client_name")
+        stylist_name = stylist.fetch("stylist_name")
         stylist_id = stylist.fetch("stylist_id").to_i()
         stylists.push(Stylist.new({:stylist_name => stylist_name, :stylist_id => stylist_id}))
       end
       stylists
     end
+
+
 end
