@@ -13,8 +13,8 @@ Allows a salon to add clients to individual stylists using a one to many relatio
 This does not include Active Record so database tables will need to be setup using the following code:
 
 CREATE DATABASE hair_salon;
-CREATE TABLE clients (id serial PRIMARY KEY, client_name varchar);
-CREATE TABLE stylists (id serial PRIMARY KEY, stylist_name varchar);
+CREATE TABLE clients (client_id serial PRIMARY KEY, client_name varchar);
+CREATE TABLE stylists (stylist_id serial PRIMARY KEY, stylist_name varchar);
 CREATE DATABASE hair_salon_test TEMPLATE hair_salon;
 
 _{Leave nothing to chance! You want it to be easy for potential employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Are there other applications this app depends on?}_
