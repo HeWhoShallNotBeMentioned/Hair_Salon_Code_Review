@@ -4,10 +4,10 @@ require('stylist')
 require("client")
 require("pry")
 
-DB = PG.connect({:dbname => "to_do_test"})
+DB = PG.connect({:dbname => "hair_salon"})
 RSpec.configure do |config|
   config.after(:each) do
-    DB.exec("DELETE FROM lists *;")
-    DB.exec("DELETE FROM tasks *;")
+    DB.exec("DELETE FROM clients *;")
+    DB.exec("DELETE FROM stylists *;")
   end
 end
