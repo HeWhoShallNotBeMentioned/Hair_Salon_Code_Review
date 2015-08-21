@@ -30,3 +30,13 @@ describe("#save") do
       expect(stylist1).to(eq(stylist2))
     end
   end
+
+  describe('.find') do
+    it('returns a stylist by its id') do
+      test_stylist = Stylist.new({:stylist_name => "Epicodus stuff", :stylist_id => nil})
+      test_stylist.save()
+      test_stylist2 = Stylist.new({:stylist_name => "Home stuff", :stylist_id => nil})
+      test_stylist2.save()
+      expect(Stylist.find(test_stylist2.stylist_id())).to(eq(test_stylist2))
+    end
+  end
