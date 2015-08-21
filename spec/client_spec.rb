@@ -14,6 +14,13 @@ describe(Client) do
     end
   end
 
+  describe("#stylist_id") do
+    it("lets you enter a stylist_id") do
+      test_client = Client.new({:client_name => "Melanie Hetrick", :client_id => 1, :stylist_id => 7})
+      expect(test_client.stylist_id()).to(eq(7))
+    end
+  end
+
   # describe("#save") do
   #   it("adds a client to the array of saved arrays") do
   #     test_client = Client.new({:description => "write new spec", :list_id => 1, :due_date => "2015-02-14 00:00:00"})
