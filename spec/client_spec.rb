@@ -7,4 +7,19 @@ describe(Client) do
     end
   end
 
+  describe("#client_name") do
+    it("lets you enter a client name") do
+      test_client = Client.new({:client_name => "Melanie Hetrick", :client_id => 1, :stylist_id => 1})
+      expect(test_client.client_name()).to(eq("Melanie Hetrick"))
+    end
+  end
+
+  # describe("#save") do
+  #   it("adds a client to the array of saved arrays") do
+  #     test_client = Client.new({:description => "write new spec", :list_id => 1, :due_date => "2015-02-14 00:00:00"})
+  #     test_task.save()
+  #     expect(Todo.all()).to(eq([test_task]))
+  #   end
+  # end
+
 end
