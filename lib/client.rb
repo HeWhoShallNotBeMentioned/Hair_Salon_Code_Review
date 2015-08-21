@@ -14,7 +14,7 @@ class Client
       returned_clients.each() do |client|
         client_name = client.fetch("client_name")
         client_id = client.fetch("client_id").to_i()
-        client_id = client.fetch("stylist_id").to_i()
+        stylist_id = client.fetch("stylist_id").to_i()
         clients.push(Client.new({:client_name => client_name, :client_id => client_id, :stylist_id => stylist_id}))
       end
       clients
@@ -23,4 +23,10 @@ class Client
     define_method(:save) do
       DB.exec("INSERT INTO clients (client_name, client_id, stylist_id) VALUES ('#{@client_name}', #{@client_id}, #{@stylist_id});")
     end
+
+    define_method(:==) do |another_client|
+        self.client_name().==(another_client.client_name()).&(self.stylist_id().==(another_client.stylist_id()))
+      end
+
+
 end
