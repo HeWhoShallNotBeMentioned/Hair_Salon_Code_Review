@@ -1,0 +1,29 @@
+<h3>Welcome staff member!</h3>
+
+<% if @stylists.any?() %>
+<h3>Here are all available stylists:</h3>
+
+<ul>
+  <% @stylists.each() do |stylist| %>
+    <li><a href="/stylists/stylist/<%= stylist.stylist_id()%>"><%= stylist.stylist_name() %></a> </li>
+  <% end %>
+</ul>
+
+<% else %>
+
+  <p>There are no Stylists yet!</p>
+
+<% end %>
+
+</br>
+<h3>Add a stylist </h3>
+
+<form action="/stylists" method="post">
+  <input name="_method" type="hidden" value="post">
+
+  <label for="stylist_name">Name:</label>
+  <input id="stylist_name" name="stylist_name" type="text">
+
+
+  <button type="submit">Add New Stylist</button>
+</form>

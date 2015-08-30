@@ -4,6 +4,7 @@ require("./lib/client")
 require("./lib/stylist")
 also_reload("lib/**/*.rb")
 require('pg')
+require('pry')
 
 
 DB = PG.connect({:dbname => "hair_salon"})
@@ -25,8 +26,18 @@ get("/stylists") do
   erb(:stylists)
 end
 
-get("/stylists/stylist/:stylist_id") do
-  @stylist = Stylist.find(params.fetch("stylist_id").to_i())
+get("/stylists/stylist/:id") do
+  @stylist = Stylist.find(params.fetch("id").to_i())
+
+  erb(:stylist)
+end
+
+
+patch('/stylists/stylist/:id') do
+  @stylist = Stylist.find(params.fetch('id').to_i)
+  stylist_name = params.fetch("stylist_name")
+
+  @stylist.update({:stylist_name => stylist_name})
   erb(:stylist)
 end
 
@@ -38,16 +49,10 @@ post("/stylists") do
   erb(:stylists)
 end
 
-patch('/stylists/stylist/:stylist_id') do
-  stylist_name = params.fetch("stylist_name")
-  @stylist = Stylist.find(params.fetch('stylist_id').to_i)
-  @stylist.update({:stylist_name => stylist_name})
-  erb(:stylists)
-end
 
 delete('/stylists/stylist/:stylist_id') do
   @stylist = Stylist.find(params.fetch('stylist_id').to_i)
   @stylist.delete()
-  @books.all()
+  @stylists = Stylist.all()
   erb(:stylists)
 end

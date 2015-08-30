@@ -1,0 +1,29 @@
+<h3>Welcome staff member!</h3>
+
+<% if @clients.any?() %>
+<h3>Here are all clients:</h3>
+
+<ul>
+  <% @clients.each() do |client| %>
+    <li><a href="/clients/client/<%= client.client_id()%>"><%= client.client_name() %></a> </li>
+  <% end %>
+</ul>
+
+<% else %>
+
+  <p>There are no clients yet!</p>
+
+<% end %>
+
+</br>
+<h3>Add a client </h3>
+
+<form action="/clients" method="post">
+  <input name="_method" type="hidden" value="post">
+
+  <label for="client_name">Name:</label>
+  <input id="client_name" name="client_name" type="text">
+
+
+  <button type="submit">Add New Client</button>
+</form>
