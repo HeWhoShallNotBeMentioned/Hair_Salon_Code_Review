@@ -14,6 +14,27 @@
     <button type="submit">Edit Client</button>
 
   </form>
+
+  <% if @client.stylist_id != 0 %>
+  <h3>Stylist: <a href="/stylists/stylist/<%= @client.stylist_id %>"><%= Stylist.find(@client.stylist_id()).stylist_name()%></a></h3>
+  <form class="" action="/clients/client/<%= @client.id() %>/remove_stylist" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <button type="submit" class="btn btn-default">Remove stylist</button>
+  </form>
+<% else %>
+  <h4>Choose a stylist:</h4>
+  <form class="" action="/clients/client/<%= @client.id() %>/add_stylist" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <select id='stylist_id' name='stylist_id' type='text' class="selectwidth">
+      <% @stylists.each() do |stylist| %>
+      <option class="option" value="<%= stylist.id()%>"><h4><%= stylist.name() %></h4></option>
+      <% end %>
+    </select>
+    <button type="submit" class="btn btn-primary btn">Choose stylist</button>
+  </form>
+<% end %>
+
+
     <h3>Delete this client:</h3>
 
     <form action="/clients/client/<%= @client.client_id() %>" method="post">
