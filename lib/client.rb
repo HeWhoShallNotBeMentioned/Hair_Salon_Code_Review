@@ -4,8 +4,8 @@ class Client
 
   define_method(:initialize) do |attributes|
     @client_name = attributes.fetch(:client_name)
-    @client_id = attributes.fetch(:client_id)
-    @stylist_id = attributes.fetch(:stylist_id)
+    @client_id = attributes.fetch(:client_id, nil)
+    @stylist_id = attributes.fetch(:stylist_id, nil)
   end
 
   define_singleton_method(:all) do
@@ -21,7 +21,8 @@ class Client
     end
 
     define_method(:save) do
-      DB.exec("INSERT INTO clients (client_name, client_id, stylist_id) VALUES ('#{@client_name}', #{@client_id}, #{@stylist_id});")
+      result = DB.exec("INSERT INTO clients (client_name) VALUES ('#{@client_name}') RETURNING client_id;")
+      @client_id = result.first().fetch("client_id").to_i()
     end
 
     define_method(:update) do |attributes|

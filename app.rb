@@ -56,3 +56,24 @@ delete('/stylists/stylist/:stylist_id') do
   @stylists = Stylist.all()
   erb(:stylists)
 end
+
+get("/clients") do
+  @clients = Client.all()
+  erb(:clients)
+end
+
+patch('/clients/client/:id') do
+  @client = Client.find(params.fetch('id').to_i)
+  client_name = params.fetch("client_name")
+
+  @client.update({:client_name => client_name})
+  erb(:client)
+end
+
+post("/clients") do
+  client_name = params.fetch("client_name")
+  @client = Client.new({:client_name => client_name, :client_id => nil, :stylist_id => nil })
+  @client.save()
+  @clients = Client.all()
+  erb(:clients)
+end
